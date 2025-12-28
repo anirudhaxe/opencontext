@@ -3,6 +3,7 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "@/components/ui/card";
 import { UIMessage } from "ai";
+import { memo } from "react";
 import { Message } from "./Message";
 import Image from "next/image";
 
@@ -11,7 +12,7 @@ interface MessageListProps {
   messagesEndRef: React.RefObject<HTMLDivElement | null>;
 }
 
-export function MessageList({ messages, messagesEndRef }: MessageListProps) {
+function MessageListComponent({ messages, messagesEndRef }: MessageListProps) {
   if (messages.length === 0) {
     return (
       <div className="h-full w-full flex items-center justify-center p-8">
@@ -49,3 +50,5 @@ export function MessageList({ messages, messagesEndRef }: MessageListProps) {
     </ScrollArea>
   );
 }
+
+export const MessageList = memo(MessageListComponent);

@@ -1,71 +1,31 @@
-"use client";
+import LandingPage from "@/components/landing/page";
+import auth from "@/lib/auth";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
-import { useState, useEffect } from "react";
-import {
-  FloatingParticles,
-  Navbar,
-  HeroSection,
-  ChatMockup,
-  FeaturesSection,
-  CtaSection,
-  Footer,
-  landingAnimations,
-} from "@/components/landing";
-import { useSession } from "@/lib/auth/auth-client";
-import { useRouter } from "next/navigation";
+export default async function Page() {
+  // access session in server component
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-/**
- * Main page component
- *
- * Manages load state and composes all landing page sections.
- */
-export default function Page() {
-  const { data: session, isPending } = useSession();
-  const router = useRouter();
+  const userId = session?.user?.id;
 
-  // State for fade-in animation on mount
-  const [isLoaded, setIsLoaded] = useState(false);
+  if (session && userId) {
+    redirect("/chat");
+  }
 
-  // Redirecting to /chat if user is already logged in
-  useEffect(() => {
-    if (!isPending && session) {
-      router.push("/chat");
-    }
-  }, [session, isPending, router]);
-  /**
-   * Initialize load state
-   * Runs once on mount
-   */
-  useEffect(() => {
-    // Trigger fade-in animation
-    setIsLoaded(true);
-  }, []); // Empty dependency array = run once on mount
-
-  return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      {/* Custom CSS animations */}
-      <style jsx>{landingAnimations}</style>
-
-      {/* Floating particle effects */}
-      <FloatingParticles />
-
-      {/* Fixed navigation bar */}
-      <Navbar />
-
-      {/* Main hero section with headline and CTAs */}
-      <HeroSection isLoaded={isLoaded} />
-
-      {/* Animated chat mockup demonstrating the product */}
-      <ChatMockup isLoaded={isLoaded} />
-
-      {/* Features section with product highlights */}
-      <FeaturesSection />
-
-      {/* Call-to-action section */}
-      <CtaSection />
-
-      {/* Footer with copyright */}
-      <Footer />
-    </div>
-  );
+  return <LandingPage />;
 }
+
+// Sample loading.ts
+// export default function Loading() {
+//   return (
+//     <div className="flex h-screen items-center justify-center">
+//       <div className="text-center">
+//         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+//         <p className="text-muted-foreground">Just a moment...</p>
+//       </div>
+//     </div>
+//   );
+// }
