@@ -121,4 +121,4 @@ PostgreSQL database with Drizzle ORM. Stores user data, chat history, and applic
 
 ## License
 
-MIT
+Apache 2.0
