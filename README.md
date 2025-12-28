@@ -57,15 +57,13 @@ cd extension && npm run dev
 
 ## Architecture
 
-```
-[Architecture Diagram Placeholder]
-```
+![Architecture Diagram](next-app/public/opencontext-architecture.png)
 
 ### Components
 
 #### Next.js Application
 
-The main web application that serves the user interface for chat, authentication, and user management. Built with Next.js 15, React, and Tailwind CSS. Uses Better Auth and webhooks for authentication.
+The main web application that serves the user interface for chat, authentication, and user management. Built with Next.js 16, React, and Tailwind CSS. Uses Better Auth and webhooks for authentication.
 
 #### Chrome Extension
 
@@ -88,7 +86,7 @@ PostgreSQL database with Drizzle ORM. Stores user data, chat history, and applic
 ### Tech Stack
 
 - **AI**: Langchain, AI SDK, Xenova (Transformer.js), Locally hosted OpenAI Whisper ASR model, Uses AI Gateway for embedding, classification, other small inferences. Uses Openrouter for main completion inference
-- **Frontend**: Next.js 15, React, TypeScript, Tailwind CSS, Shadcn/ui
+- **Frontend**: Next.js 16, React, TypeScript, Tailwind CSS, Shadcn/ui
 - **Extension**: Chrome Extension API, React, Vite
 - **Backend**: Hono, Trpc, BullMQ
 - **Database**: PostgreSQL, Drizzle ORM
@@ -98,6 +96,7 @@ PostgreSQL database with Drizzle ORM. Stores user data, chat history, and applic
 
 - Contextualize text web content directly from web pages using browser extension.
 - Contextualize online youtube videos (currently only vectorization of transcriptions is supported) directly from extension.
+- Conditional RAG (Retrieval-Augmented Generation)
 - Chat application with custom context selector, tool calls, custom markdown formatting.
 
 ## Notes
