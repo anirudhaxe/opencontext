@@ -9,52 +9,6 @@
 </p>
 <p align="center">Context oriented AI application.</p>
 
-## Local Setup
-
-### Prerequisites
-
-- Node.js 18+
-- npm
-- Docker (for local databases)
-- API Keys of inference providers/tools services (Currently being used: AI Gateway, Openrouter, Tavily search)
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/anirudhaxe/opencontext.git
-cd opencontext
-
-# Install dependencies in /extension, /hono-worker, /next-app
-cd extension && npm install
-cd hono-worker && npm install
-cd next-app && npm install
-
-# Set up environment variables (Add secrets here)
-cp extension/.env.example extension/.env
-cp hono-worker/.env.example hono-worker/.env
-cp next-app/.env.example next-app/.env
-
-# Start local PostgreSQL database
-npm run db:run
-
-# Start local Valkey instance and local qdrant instance
-npm run docker:up
-
-# Run database migrations
-cd next-app && npm run db:push
-
-# Start development servers
-# Terminal 1: Next.js app
-cd next-app && npm run dev
-
-# Terminal 2: Hono worker
-cd hono-worker && npm run dev
-
-# Terminal 3: Chrome extension
-cd extension && npm run dev
-```
-
 ## Architecture
 
 ![Architecture Diagram](next-app/public/opencontext-architecture.png)
@@ -103,6 +57,52 @@ PostgreSQL database with Drizzle ORM. Stores user data, chat history, and applic
 
 - Currently being developed as a personal project.
 - Features like live voice AI responses, multimodality in chat, MCP implementation, in-extension generation, collections for classifying the jobs are on the roadmap.
+
+## Local Setup
+
+### Prerequisites
+
+- Node.js 18+
+- npm
+- Docker (for local databases)
+- API Keys of inference providers/tools services (Currently being used: AI Gateway, Openrouter, Tavily search)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/anirudhaxe/opencontext.git
+cd opencontext
+
+# Install dependencies in /extension, /hono-worker, /next-app
+cd extension && npm install
+cd hono-worker && npm install
+cd next-app && npm install
+
+# Set up environment variables (Add secrets here)
+cp extension/.env.example extension/.env
+cp hono-worker/.env.example hono-worker/.env
+cp next-app/.env.example next-app/.env
+
+# Start local PostgreSQL database
+npm run db:run
+
+# Start local Valkey instance and local qdrant instance
+npm run docker:up
+
+# Run database migrations
+cd next-app && npm run db:push
+
+# Start development servers
+# Terminal 1: Next.js app
+cd next-app && npm run dev
+
+# Terminal 2: Hono worker
+cd hono-worker && npm run dev
+
+# Terminal 3: Chrome extension
+cd extension && npm run dev
+```
 
 ## References
 
