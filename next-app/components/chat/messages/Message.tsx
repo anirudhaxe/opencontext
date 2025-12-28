@@ -6,6 +6,8 @@ import { Card } from "@/components/ui/card";
 import { Cloud, User, Wrench, Globe, Calculator } from "lucide-react";
 import { UIMessage } from "ai";
 import Image from "next/image";
+import { MarkdownRenderer } from "./MarkdownRenderer";
+import "./markdown.css";
 
 interface ToolPart {
   type: string;
@@ -79,12 +81,12 @@ export function Message({ message }: MessageProps) {
 
   return (
     <div
-      className={`flex gap-4 p-4 transition-colors ${
+      className={`flex gap-3 md:gap-4 p-3 md:p-4 transition-colors ${
         isUser ? "bg-card/50" : "bg-muted/30"
       }`}
     >
       <div className="shrink-0">
-        <Avatar className="w-8 h-8 ring-2 ring-primary/10">
+        <Avatar className="w-7 h-7 md:w-8 md:h-8 ring-2 ring-primary/10">
           <AvatarFallback
             className={
               isUser
@@ -93,20 +95,21 @@ export function Message({ message }: MessageProps) {
             }
           >
             {isUser ? (
-              <User className="w-4 h-4" />
+              <User className="w-3.5 h-3.5 md:w-4 md:h-4" />
             ) : (
               <Image
                 src="/logo.png"
                 alt="opencontext-logo"
-                width={25}
-                height={25}
+                width={20}
+                height={20}
+                className="md:w-[25px] md:h-[25px]"
               />
             )}
           </AvatarFallback>
         </Avatar>
       </div>
 
-      <div className="flex-1 space-y-2">
+      <div className="flex-1 min-w-0 space-y-2 overflow-hidden">
         <div
           className={`font-medium text-sm ${
             isUser ? "text-primary" : "text-muted-foreground"
@@ -115,17 +118,16 @@ export function Message({ message }: MessageProps) {
           {isUser ? "You" : "Assistant"}
         </div>
 
-        <div className="prose prose-sm dark:prose-invert max-w-none">
+        <div className="prose prose-sm dark:prose-invert max-w-none overflow-x-auto overflow-y-visible">
           {message.parts.map((part, i) => {
             switch (part.type) {
               case "text":
                 return (
-                  <div
+                  <MarkdownRenderer
                     key={`${message.id}-${i}`}
-                    className="whitespace-pre-wrap text-foreground leading-relaxed"
-                  >
-                    {part.text}
-                  </div>
+                    content={part.text}
+                    className="text-foreground leading-relaxed"
+                  />
                 );
               case "tool-weather":
               case "tool-calculator":

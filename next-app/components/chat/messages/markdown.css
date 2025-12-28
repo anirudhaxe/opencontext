@@ -1,0 +1,1207 @@
+/* =====================================================
+   Markdown Styling for OpenContext
+   Theme: Blue-Cyan (#5EB8D0)
+   Uses: Brand gradients, glassmorphism, OKLCH colors
+   ===================================================== */
+
+.markdown-content {
+  color: inherit;
+  line-height: 1.75;
+  letter-spacing: -0.01em;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
+
+/* =====================================================
+   HEADINGS - Brand Gradients
+   ===================================================== */
+
+.markdown-content h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(
+    135deg,
+    oklch(0.72 0.18 200),
+    oklch(0.75 0.2 195)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.markdown-content h1::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    oklch(0.72 0.18 200),
+    oklch(0.65 0.15 190)
+  );
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.markdown-content h1:hover::after {
+  width: 100%;
+}
+
+.markdown-content h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 1.75rem;
+  margin-bottom: 0.875rem;
+  background: linear-gradient(
+    135deg,
+    oklch(0.72 0.18 200),
+    oklch(0.65 0.15 190)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.015em;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid oklch(0.72 0.18 200 / 0.15);
+}
+
+.markdown-content h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: oklch(0.92 0.02 200);
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.markdown-content h3::before {
+  content: "";
+  width: 4px;
+  height: 1.25rem;
+  background: linear-gradient(
+    180deg,
+    oklch(0.72 0.18 200),
+    oklch(0.65 0.15 190)
+  );
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.markdown-content h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.625rem;
+  color: oklch(0.88 0.02 200);
+  letter-spacing: -0.005em;
+}
+
+.markdown-content h5 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: oklch(0.85 0.02 200);
+}
+
+.markdown-content h6 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: oklch(0.6 0.02 200);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* =====================================================
+   PARAGRAPHS - Typography
+   ===================================================== */
+
+.markdown-content p {
+  margin-bottom: 1rem;
+  color: oklch(0.92 0.02 200);
+  line-height: 1.8;
+}
+
+/* =====================================================
+   LINKS - Brand Animated Underline
+   ===================================================== */
+
+.markdown-content a {
+  color: oklch(0.72 0.18 200);
+  text-decoration: none;
+  position: relative;
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0.125rem 0;
+}
+
+.markdown-content a::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    oklch(0.72 0.18 200),
+    oklch(0.65 0.15 190)
+  );
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.markdown-content a:hover {
+  color: oklch(0.75 0.2 195);
+}
+
+.markdown-content a:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.markdown-content a:active {
+  transform: scale(0.98);
+}
+
+/* =====================================================
+   BOLD & ITALIC - Brand Emphasis
+   ===================================================== */
+
+.markdown-content strong {
+  font-weight: 700;
+  color: oklch(0.72 0.18 200);
+}
+
+.markdown-content em {
+  font-style: italic;
+  color: oklch(0.88 0.02 200);
+}
+
+/* =====================================================
+   INLINE CODE - Glass Effect
+   ===================================================== */
+
+.markdown-content code:not(pre code) {
+  font-size: 0.875em;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  background: oklch(0.72 0.18 200 / 0.08);
+  color: oklch(0.72 0.18 200);
+  padding: 0.1875rem 0.5rem;
+  border-radius: 0.375rem;
+  border: 1px solid oklch(0.72 0.18 200 / 0.15);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.markdown-content code:not(pre code):hover {
+  background: oklch(0.72 0.18 200 / 0.12);
+  border-color: oklch(0.72 0.18 200 / 0.25);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px 0 oklch(0.72 0.18 200 / 0.1);
+}
+
+/* =====================================================
+   CODE BLOCKS - Glassmorphism & Styling
+   ===================================================== */
+
+.markdown-content pre {
+  margin: 1.25rem 0;
+  padding: 1.25rem;
+  background: oklch(0.1 0.02 220 / 0.95);
+  border: 1px solid oklch(0.72 0.18 200 / 0.2);
+  border-radius: 0.75rem;
+  overflow-x: auto;
+  position: relative;
+  backdrop-filter: blur(8px);
+  box-shadow:
+    0 4px 16px 0 oklch(0 0 0 / 0.3),
+    inset 0 1px 0 0 oklch(0.72 0.18 200 / 0.05);
+  transition: all 0.3s ease;
+}
+
+.markdown-content pre::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    oklch(0.72 0.18 200),
+    oklch(0.65 0.15 190)
+  );
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.markdown-content pre:hover {
+  border-color: oklch(0.72 0.18 200 / 0.3);
+  box-shadow:
+    0 8px 24px 0 oklch(0 0 0 / 0.4),
+    inset 0 1px 0 0 oklch(0.72 0.18 200 / 0.08),
+    0 0 0 1px oklch(0.72 0.18 200 / 0.1);
+}
+
+.markdown-content pre code {
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  font-size: 0.875em;
+  line-height: 1.7;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  color: oklch(0.92 0.02 200);
+}
+
+/* =====================================================
+   LISTS - Custom Brand Markers
+   ===================================================== */
+
+.markdown-content ul,
+.markdown-content ol {
+  margin: 0.75rem 0;
+  padding-left: 1.75rem;
+  color: oklch(0.92 0.02 200);
+}
+
+.markdown-content ul {
+  list-style-type: none;
+}
+
+.markdown-content ul li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.7;
+}
+
+.markdown-content ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: oklch(0.72 0.18 200);
+  font-size: 1.25em;
+  line-height: 1;
+  font-weight: bold;
+}
+
+.markdown-content ul ul li::before {
+  content: "◦";
+  font-size: 1em;
+}
+
+.markdown-content ol {
+  list-style-position: outside;
+  counter-reset: item;
+}
+
+.markdown-content ol li {
+  position: relative;
+  padding-left: 0.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.7;
+}
+
+.markdown-content ol li::marker {
+  font-weight: 600;
+  color: oklch(0.72 0.18 200);
+}
+
+.markdown-content ul ul,
+.markdown-content ol ol,
+.markdown-content ul ol,
+.markdown-content ol ul {
+  margin: 0.375rem 0;
+}
+
+/* =====================================================
+   TASK LISTS - Custom Checkbox Styling
+   ===================================================== */
+
+.markdown-content input[type="checkbox"] {
+  margin-right: 0.75rem;
+  width: 1.125rem;
+  height: 1.125rem;
+  accent-color: oklch(0.72 0.18 200);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid oklch(0.72 0.18 200 / 0.4);
+  border-radius: 0.25rem;
+}
+
+.markdown-content input[type="checkbox"]:checked {
+  background: linear-gradient(
+    135deg,
+    oklch(0.72 0.18 200),
+    oklch(0.65 0.15 190)
+  );
+  border-color: oklch(0.72 0.18 200);
+}
+
+.markdown-content input[type="checkbox"]:hover {
+  border-color: oklch(0.72 0.18 200 / 0.6);
+  transform: scale(1.05);
+}
+
+/* =====================================================
+   BLOCKQUOTES - Glass Effect
+   ===================================================== */
+
+.markdown-content blockquote {
+  margin: 1.25rem 0;
+  padding: 1.25rem 1.5rem;
+  background: oklch(0.12 0.02 220 / 0.8);
+  border-left: 4px solid oklch(0.72 0.18 200);
+  color: oklch(0.7 0.02 200);
+  font-style: italic;
+  border-radius: 0 0.75rem 0.75rem 0;
+  backdrop-filter: blur(12px);
+  border: 1px solid oklch(0.72 0.18 200 / 0.15);
+  border-left-width: 4px;
+  box-shadow:
+    0 4px 12px 0 oklch(0 0 0 / 0.15),
+    inset 0 1px 0 0 oklch(0.72 0.18 200 / 0.05);
+  transition: all 0.3s ease;
+}
+
+.markdown-content blockquote:hover {
+  background: oklch(0.14 0.02 220 / 0.9);
+  border-color: oklch(0.72 0.18 200 / 0.25);
+  transform: translateX(4px);
+}
+
+.markdown-content blockquote p {
+  margin-bottom: 0;
+  color: oklch(0.8 0.02 200);
+}
+
+/* =====================================================
+   TABLES - Glass Design
+   ===================================================== */
+
+/* Table wrapper for horizontal scrolling - use this wrapper for tables that need to scroll */
+.markdown-content .table-wrapper {
+  overflow-x: auto;
+  overflow-y: visible;
+  margin: 1.25rem 0;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 16px 0 oklch(0 0 0 / 0.15);
+  /* Custom scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: oklch(0.72 0.18 200 / 0.5) oklch(0.12 0.02 220 / 0.3);
+  /* Ensure content can scroll horizontally */
+  -webkit-overflow-scrolling: touch;
+}
+
+.markdown-content .table-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.markdown-content .table-wrapper::-webkit-scrollbar-track {
+  background: oklch(0.12 0.02 220 / 0.3);
+  border-radius: 4px;
+}
+
+.markdown-content .table-wrapper::-webkit-scrollbar-thumb {
+  background: oklch(0.72 0.18 200 / 0.5);
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.markdown-content .table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.72 0.18 200 / 0.7);
+}
+
+/* Default table styling */
+.markdown-content table {
+  width: 100%;
+  margin: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: oklch(0.12 0.02 220 / 0.8);
+  border-radius: 0.75rem;
+  border: 1px solid oklch(0.72 0.18 200 / 0.15);
+  backdrop-filter: blur(12px);
+  /* Ensure table doesn't shrink below content */
+  min-width: fit-content;
+  /* Prevent content from wrapping inside cells */
+  white-space: nowrap;
+}
+
+/* Tables inside wrapper should have horizontal scrolling */
+.markdown-content .table-wrapper table {
+  width: auto;
+  min-width: fit-content;
+}
+
+/* Table not in wrapper - add margins */
+.markdown-content > table {
+  margin: 1.25rem 0;
+  box-shadow: 0 4px 16px 0 oklch(0 0 0 / 0.15);
+}
+
+/* Allow table cells to wrap on very small screens if needed */
+@media (max-width: 640px) {
+  .markdown-content table td,
+  .markdown-content table th,
+  .markdown-content .table-wrapper table td,
+  .markdown-content .table-wrapper table th {
+    /* Allow wrapping for better mobile experience */
+    white-space: normal;
+    min-width: 4rem;
+  }
+}
+
+.markdown-content thead {
+  background: linear-gradient(
+    180deg,
+    oklch(0.72 0.18 200 / 0.15),
+    oklch(0.65 0.15 190 / 0.1)
+  );
+  border-bottom: 2px solid oklch(0.72 0.18 200 / 0.3);
+}
+
+.markdown-content th {
+  font-weight: 700;
+  padding: 0.875rem 1.125rem;
+  text-align: left;
+  color: oklch(0.92 0.02 200);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid oklch(0.72 0.18 200 / 0.1);
+}
+
+.markdown-content th:first-child {
+  border-radius: 0.75rem 0 0 0;
+}
+
+.markdown-content th:last-child {
+  border-radius: 0 0.75rem 0 0;
+}
+
+.markdown-content td {
+  padding: 0.875rem 1.125rem;
+  color: oklch(0.88 0.02 200);
+  border-bottom: 1px solid oklch(0.72 0.18 200 / 0.08);
+  transition: all 0.2s ease;
+}
+
+.markdown-content tbody tr {
+  transition: all 0.2s ease;
+}
+
+.markdown-content tbody tr:hover {
+  background: oklch(0.72 0.18 200 / 0.05);
+}
+
+.markdown-content tbody tr:hover td {
+  color: oklch(0.95 0.02 200);
+}
+
+.markdown-content tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.markdown-content tbody tr:last-child td:first-child {
+  border-radius: 0 0 0 0.75rem;
+}
+
+.markdown-content tbody tr:last-child td:last-child {
+  border-radius: 0 0 0.75rem 0;
+}
+
+/* =====================================================
+   HORIZONTAL RULE - Brand Gradient
+   ===================================================== */
+
+.markdown-content hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    oklch(0.72 0.18 200 / 0.5) 50%,
+    transparent 100%
+  );
+  margin: 2rem 0;
+  position: relative;
+}
+
+.markdown-content hr::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: oklch(0.72 0.18 200);
+  border-radius: 50%;
+  box-shadow: 0 0 12px 0 oklch(0.72 0.18 200 / 0.5);
+}
+
+/* =====================================================
+   IMAGES - Styling
+   ===================================================== */
+
+.markdown-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  margin: 1rem 0;
+  border: 2px solid oklch(0.72 0.18 200 / 0.2);
+  box-shadow:
+    0 4px 16px 0 oklch(0 0 0 / 0.2),
+    0 0 0 1px oklch(0.72 0.18 200 / 0.1);
+  transition: all 0.3s ease;
+}
+
+.markdown-content img:hover {
+  border-color: oklch(0.72 0.18 200 / 0.4);
+  box-shadow:
+    0 8px 24px 0 oklch(0 0 0 / 0.3),
+    0 0 0 2px oklch(0.72 0.18 200 / 0.15);
+  transform: scale(1.02);
+}
+
+/* =====================================================
+   KEYBOARD SHORTCUTS - 3D Effect
+   ===================================================== */
+
+.markdown-content kbd {
+  font-size: 0.875em;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  background: linear-gradient(
+    180deg,
+    oklch(0.72 0.18 200 / 0.15),
+    oklch(0.65 0.15 190 / 0.1)
+  );
+  color: oklch(0.72 0.18 200);
+  padding: 0.1875rem 0.5rem;
+  border-radius: 0.375rem;
+  border: 1px solid oklch(0.72 0.18 200 / 0.3);
+  border-top-color: oklch(0.72 0.18 200 / 0.5);
+  box-shadow:
+    0 2px 0 0 oklch(0.72 0.18 200 / 0.2),
+    0 4px 6px 0 oklch(0 0 0 / 0.1);
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.markdown-content kbd:hover {
+  transform: translateY(1px);
+  box-shadow:
+    0 1px 0 0 oklch(0.72 0.18 200 / 0.2),
+    0 2px 4px 0 oklch(0 0 0 / 0.1);
+}
+
+.markdown-content kbd:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 0 oklch(0.72 0.18 200 / 0.2);
+}
+
+/* =====================================================
+   DEL & INS - Styling
+   ===================================================== */
+
+.markdown-content del {
+  text-decoration: line-through;
+  color: oklch(0.5 0.02 200);
+  text-decoration-color: oklch(0.72 0.18 200 / 0.4);
+  text-decoration-thickness: 2px;
+}
+
+.markdown-content ins {
+  text-decoration: none;
+  background: linear-gradient(
+    180deg,
+    oklch(0.72 0.18 200 / 0.2),
+    oklch(0.72 0.18 200 / 0.05)
+  );
+  color: oklch(0.72 0.18 200);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  border-bottom: 2px solid oklch(0.72 0.18 200 / 0.4);
+  font-weight: 500;
+}
+
+/* =====================================================
+   SUPERSCRIPT & SUBSCRIPT
+   ===================================================== */
+
+.markdown-content sup {
+  font-size: 0.7em;
+  vertical-align: super;
+  color: oklch(0.72 0.18 200);
+  font-weight: 600;
+}
+
+.markdown-content sub {
+  font-size: 0.7em;
+  vertical-align: sub;
+  color: oklch(0.72 0.18 200);
+  font-weight: 600;
+}
+
+/* =====================================================
+   DETAILS & SUMMARY - Accordion
+   ===================================================== */
+
+.markdown-content details {
+  margin: 1.25rem 0;
+  padding: 0;
+  background: oklch(0.12 0.02 220 / 0.8);
+  border: 1px solid oklch(0.72 0.18 200 / 0.15);
+  border-radius: 0.75rem;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 12px 0 oklch(0 0 0 / 0.15);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.markdown-content details:hover {
+  border-color: oklch(0.72 0.18 200 / 0.25);
+}
+
+.markdown-content summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: oklch(0.92 0.02 200);
+  padding: 1rem 1.25rem;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(180deg, oklch(0.72 0.18 200 / 0.1), transparent);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.markdown-content summary::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, oklch(0.72 0.18 200 / 0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.markdown-content details[open] summary::before {
+  opacity: 1;
+}
+
+.markdown-content summary::after {
+  content: "▼";
+  font-size: 0.75em;
+  color: oklch(0.72 0.18 200);
+  transition: transform 0.3s ease;
+}
+
+.markdown-content details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.markdown-content summary:hover {
+  background: linear-gradient(180deg, oklch(0.72 0.18 200 / 0.15), transparent);
+  color: oklch(0.72 0.18 200);
+}
+
+.markdown-content details > *:not(summary) {
+  padding: 0 1.25rem 1.25rem;
+}
+
+/* =====================================================
+   DARK MODE SPECIFIC STYLES
+   ===================================================== */
+
+.dark .markdown-content h1::after {
+  background: linear-gradient(90deg, oklch(0.75 0.2 200), oklch(0.68 0.17 190));
+}
+
+.dark .markdown-content h2 {
+  border-bottom-color: oklch(0.72 0.18 200 / 0.12);
+}
+
+.dark .markdown-content h3::before {
+  background: linear-gradient(
+    180deg,
+    oklch(0.75 0.2 200),
+    oklch(0.68 0.17 190)
+  );
+}
+
+.dark .markdown-content code:not(pre code):hover {
+  background: oklch(0.75 0.2 200 / 0.15);
+  border-color: oklch(0.75 0.2 200 / 0.3);
+  box-shadow: 0 2px 8px 0 oklch(0.75 0.2 200 / 0.15);
+}
+
+.dark .markdown-content blockquote {
+  background: oklch(0.1 0.02 220 / 0.9);
+  border-color: oklch(0.75 0.2 200);
+}
+
+.dark .markdown-content blockquote:hover {
+  background: oklch(0.12 0.02 220 / 0.95);
+}
+
+.dark .markdown-content img {
+  border-color: oklch(0.75 0.2 200 / 0.2);
+}
+
+.dark .markdown-content img:hover {
+  border-color: oklch(0.75 0.2 200 / 0.35);
+}
+
+.dark .markdown-content kbd {
+  background: linear-gradient(
+    180deg,
+    oklch(0.75 0.2 200 / 0.15),
+    oklch(0.68 0.17 190 / 0.1)
+  );
+  color: oklch(0.75 0.2 200);
+  border-color: oklch(0.75 0.2 200 / 0.3);
+}
+
+.dark .markdown-content details {
+  background: oklch(0.1 0.02 220 / 0.95);
+}
+
+.dark .markdown-content details summary {
+  background: linear-gradient(180deg, oklch(0.75 0.2 200 / 0.1), transparent);
+}
+
+.dark .markdown-content details summary:hover {
+  background: linear-gradient(180deg, oklch(0.75 0.2 200 / 0.15), transparent);
+}
+
+.dark .markdown-content .table-wrapper {
+  scrollbar-color: oklch(0.75 0.2 200 / 0.6) oklch(0.1 0.02 220 / 0.3);
+}
+
+.dark .markdown-content .table-wrapper::-webkit-scrollbar-track {
+  background: oklch(0.1 0.02 220 / 0.3);
+}
+
+.dark .markdown-content .table-wrapper::-webkit-scrollbar-thumb {
+  background: oklch(0.75 0.2 200 / 0.6);
+}
+
+.dark .markdown-content .table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.75 0.2 200 / 0.8);
+}
+
+/* =====================================================
+   RESPONSIVE DESIGN
+   ===================================================== */
+
+/* Large Mobile & Small Tablet */
+@media (max-width: 768px) {
+  .markdown-content h1 {
+    font-size: 1.625rem;
+  }
+
+  .markdown-content h2 {
+    font-size: 1.375rem;
+  }
+
+  .markdown-content h3 {
+    font-size: 1.125rem;
+  }
+
+  .markdown-content h4 {
+    font-size: 1rem;
+  }
+
+  .markdown-content p {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+  }
+
+  .markdown-content table,
+  .markdown-content .table-wrapper table {
+    font-size: 0.8125rem;
+  }
+
+  .markdown-content th,
+  .markdown-content td,
+  .markdown-content .table-wrapper th,
+  .markdown-content .table-wrapper td {
+    padding: 0.5rem 0.625rem;
+  }
+
+  .markdown-content blockquote {
+    padding: 0.875rem 1rem;
+    margin: 1rem 0;
+  }
+
+  .markdown-content pre {
+    padding: 0.875rem;
+    margin: 1rem 0;
+    font-size: 0.8125em;
+  }
+
+  .markdown-content ul,
+  .markdown-content ol {
+    padding-left: 1.25rem;
+  }
+
+  .markdown-content ul li,
+  .markdown-content ol li {
+    padding-left: 1rem;
+  }
+
+  .markdown-content code:not(pre code) {
+    font-size: 0.8125em;
+    padding: 0.125rem 0.375rem;
+  }
+
+  .markdown-content img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Mobile Phones */
+@media (max-width: 640px) {
+  .markdown-content h1 {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .markdown-content h2 {
+    font-size: 1.25rem;
+    margin-top: 1.25rem;
+  }
+
+  .markdown-content h3 {
+    font-size: 1.0625rem;
+    margin-top: 1.125rem;
+  }
+
+  .markdown-content h4 {
+    font-size: 0.9375rem;
+  }
+
+  .markdown-content p {
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  /* Tables - ensure horizontal scrolling without negative margins */
+  .markdown-content .table-wrapper {
+    margin: 0.875rem 0;
+    border-radius: 0.5rem;
+    max-width: 100%;
+  }
+
+  .markdown-content table,
+  .markdown-content .table-wrapper table {
+    font-size: 0.75rem;
+  }
+
+  .markdown-content th,
+  .markdown-content td,
+  .markdown-content .table-wrapper th,
+  .markdown-content .table-wrapper td {
+    padding: 0.375rem 0.5rem;
+    min-width: 3rem;
+  }
+
+  .markdown-content th {
+    font-size: 0.6875rem;
+    letter-spacing: 0.03em;
+  }
+
+  .markdown-content blockquote {
+    padding: 0.75rem 0.875rem;
+    margin: 0.875rem 0;
+    font-size: 0.875rem;
+  }
+
+  .markdown-content pre {
+    padding: 0.75rem;
+    margin: 0.875rem 0;
+    font-size: 0.75em;
+    line-height: 1.5;
+    border-radius: 0.5rem;
+  }
+
+  .markdown-content pre code {
+    font-size: 0.75em;
+  }
+
+  /* Lists - reduce padding on mobile */
+  .markdown-content ul,
+  .markdown-content ol {
+    padding-left: 1rem;
+    margin: 0.5rem 0;
+  }
+
+  .markdown-content ul li {
+    padding-left: 0.875rem;
+    margin-bottom: 0.375rem;
+  }
+
+  .markdown-content ol li {
+    padding-left: 0.25rem;
+    margin-bottom: 0.375rem;
+  }
+
+  /* Inline code - smaller on mobile */
+  .markdown-content code:not(pre code) {
+    font-size: 0.8125em;
+    padding: 0.0625rem 0.25rem;
+    display: inline-block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  /* Images - ensure they don't overflow */
+  .markdown-content img {
+    border-radius: 0.5rem;
+    margin: 0.75rem 0;
+    border-width: 1px;
+  }
+
+  /* Details/Summary - smaller on mobile */
+  .markdown-content details {
+    margin: 0.875rem 0;
+    border-radius: 0.5rem;
+  }
+
+  .markdown-content summary {
+    padding: 0.75rem 0.875rem;
+    font-size: 0.875rem;
+  }
+
+  .markdown-content details > *:not(summary) {
+    padding: 0 0.875rem 0.875rem;
+  }
+
+  /* Links - ensure proper wrapping */
+  .markdown-content a {
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Table wrapper scrollbar styling for mobile */
+  .markdown-content .table-wrapper::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .markdown-content .table-wrapper::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+  }
+
+  .markdown-content .table-wrapper::-webkit-scrollbar-track {
+    border-radius: 2px;
+  }
+}
+
+/* Very small screens (iPhone SE, etc.) */
+@media (max-width: 375px) {
+  .markdown-content h1 {
+    font-size: 1.375rem;
+  }
+
+  .markdown-content h2 {
+    font-size: 1.125rem;
+  }
+
+  .markdown-content h3 {
+    font-size: 1rem;
+  }
+
+  .markdown-content p {
+    font-size: 0.8125rem;
+  }
+
+  .markdown-content table,
+  .markdown-content .table-wrapper table {
+    font-size: 0.6875rem;
+  }
+
+  .markdown-content th,
+  .markdown-content td,
+  .markdown-content .table-wrapper th,
+  .markdown-content .table-wrapper td {
+    padding: 0.25rem 0.375rem;
+    min-width: 2.5rem;
+  }
+
+  .markdown-content th {
+    font-size: 0.625rem;
+  }
+
+  .markdown-content pre {
+    font-size: 0.6875em;
+    padding: 0.5rem;
+  }
+
+  .markdown-content blockquote {
+    font-size: 0.8125rem;
+    padding: 0.625rem 0.75rem;
+  }
+}
+
+/* =====================================================
+   PRINT STYLES
+   ===================================================== */
+
+@media print {
+  .markdown-content a::before {
+    display: none;
+  }
+
+  .markdown-content code:not(pre code),
+  .markdown-content pre {
+    background: oklch(0.95 0.01 200);
+    border-color: oklch(0.7 0.02 200);
+    color: oklch(0.1 0.02 220);
+    box-shadow: none;
+  }
+
+  .markdown-content blockquote {
+    background: oklch(0.95 0.01 200);
+    border-color: oklch(0.7 0.02 200);
+    color: oklch(0.3 0.02 220);
+    box-shadow: none;
+  }
+
+  .markdown-content table,
+  .markdown-content div.table-wrapper table {
+    background: oklch(0.95 0.01 200);
+    border-color: oklch(0.7 0.02 200);
+    box-shadow: none;
+  }
+
+  .markdown-content div.table-wrapper {
+    overflow: visible;
+    box-shadow: none;
+  }
+}
+
+/* =====================================================
+   ACCESSIBILITY
+   ===================================================== */
+
+.markdown-content a:focus-visible {
+  outline: 2px solid oklch(0.72 0.18 200);
+  outline-offset: 2px;
+  border-radius: 0.125rem;
+}
+
+.markdown-content input[type="checkbox"]:focus-visible {
+  outline: 2px solid oklch(0.72 0.18 200);
+  outline-offset: 2px;
+}
+
+.markdown-content details summary:focus-visible {
+  outline: 2px solid oklch(0.72 0.18 200);
+  outline-offset: -2px;
+}
+
+/* =====================================================
+   ANIMATIONS
+   ===================================================== */
+
+/* =====================================================
+   PROSE OVERRIDES FOR BETTER CONTROL
+   ===================================================== */
+
+/* Ensure max-width doesn't cause overflow */
+.markdown-content {
+  max-width: 100%;
+}
+
+/* Prevent prose from breaking layout */
+.markdown-content * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Fix for code blocks - maintain formatting but allow horizontal scrolling */
+.markdown-content pre {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Fix for inline code with long content */
+.markdown-content code:not(pre code) {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+/* Fix for long URLs in links */
+.markdown-content a {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+/* Fix for long table content */
+.markdown-content td,
+.markdown-content th {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.markdown-content > *:first-child {
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection styling */
+.markdown-content ::selection {
+  background: oklch(0.72 0.18 200 / 0.2);
+  color: oklch(0.95 0.02 200);
+}
+
+.dark .markdown-content ::selection {
+  background: oklch(0.75 0.2 200 / 0.25);
+  color: oklch(0.08 0.02 220);
+}
