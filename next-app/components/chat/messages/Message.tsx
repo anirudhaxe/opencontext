@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Cloud, User, Wrench, Globe, Calculator } from "lucide-react";
 import { UIMessage } from "ai";
 import Image from "next/image";
+import { memo } from "react";
 import { MarkdownRenderer } from "./MarkdownRenderer";
 import "./markdown.css";
 
@@ -13,7 +14,7 @@ interface ToolPart {
   type: string;
 }
 
-function ToolCallDisplay({ part }: { part: ToolPart }) {
+const ToolCallDisplay = memo(function ToolCallDisplay({ part }: { part: ToolPart }) {
   const getToolInfo = (toolType: string) => {
     switch (toolType) {
       case "tool-weather":
@@ -70,13 +71,13 @@ function ToolCallDisplay({ part }: { part: ToolPart }) {
       </div>
     </Card>
   );
-}
+});
 
 interface MessageProps {
   message: UIMessage;
 }
 
-export function Message({ message }: MessageProps) {
+function MessageComponent({ message }: MessageProps) {
   const isUser = message.role === "user";
 
   return (
@@ -147,3 +148,5 @@ export function Message({ message }: MessageProps) {
     </div>
   );
 }
+
+export const Message = memo(MessageComponent);

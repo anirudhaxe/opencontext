@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useMemo, memo } from "react";
 import { marked } from "marked";
 
 interface MarkdownRendererProps {
@@ -8,7 +8,7 @@ interface MarkdownRendererProps {
   className?: string;
 }
 
-export function MarkdownRenderer({ content, className = "" }: MarkdownRendererProps) {
+function MarkdownRendererComponent({ content, className = "" }: MarkdownRendererProps) {
   const htmlContent = useMemo(() => {
     // Configure marked options
     marked.setOptions({
@@ -41,3 +41,5 @@ export function MarkdownRenderer({ content, className = "" }: MarkdownRendererPr
     />
   );
 }
+
+export const MarkdownRenderer = memo(MarkdownRendererComponent);

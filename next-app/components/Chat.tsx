@@ -1,7 +1,7 @@
 "use client";
 
 import { useChat } from "@ai-sdk/react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { DefaultChatTransport, generateId, UIMessage } from "ai";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -38,6 +38,11 @@ export default function Chat({
   const [selectedJobs, setSelectedJobs] = useState<
     { jobId: string; jobName: string }[]
   >([]);
+
+  // Memoize setInput to prevent unnecessary re-renders
+  const handleInputChange = useCallback((value: string) => {
+    setInput(value);
+  }, []);
 
   // track ref between re-renders
   useEffect(() => {
@@ -91,33 +96,34 @@ export default function Chat({
     },
   );
 
-  const handleChatDeletion = ({ chatId }: { chatId: string }) => {
+  const handleChatDeletion = useCallback(({ chatId }: { chatId: string }) => {
     mutateChatDeletion({
       chatId,
     });
-  };
+  }, [mutateChatDeletion]);
+
   // scroll to bottom when messages populate
-  const scrollToBottom = () => {
+  const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  }, []);
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, scrollToBottom]);
 
-  const handleSidebarNewChat = () => {
+  const handleSidebarNewChat = useCallback(() => {
     router.push(`/chat/${generateId()}`, { scroll: false });
-  };
+  }, [router]);
 
-  const handleThreadSelect = (threadId: string) => {
+  const handleThreadSelect = useCallback((threadId: string) => {
     setSelectedThreadId(threadId);
     router.push(`/chat/${threadId}`);
-  };
+  }, [router]);
 
-  const handleThemeToggle = () => {
+  const handleThemeToggle = useCallback(() => {
     setIsDarkMode(!isDarkMode);
     // TODO: implement theme toggle
-  };
+  }, [isDarkMode]);
 
   return (
     <div className="flex h-screen bg-linear-to-br from-background via-background to-card">
@@ -270,7 +276,7 @@ export default function Chat({
         <div className="relative z-10 mx-auto flex w-full max-w-4xl gap-2 border-t border-border/50 bg-linear-to-t from-card via-card/80 to-transparent px-2 pb-3 md:px-4 md:pb-4 pt-2">
           <MultimodalInput
             input={input}
-            setInput={setInput}
+            setInput={handleInputChange}
             status={status}
             stop={stop}
             sendMessage={sendMessage}
