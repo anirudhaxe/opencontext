@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   title: "OpenContext - Capture, Organize, and Chat with Your Digital Context",
   description:
     "Seamlessly collect, organize, and chat with your digital context. Turn scattered information into coherent conversations with OpenContext.",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({

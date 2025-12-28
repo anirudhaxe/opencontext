@@ -91,7 +91,7 @@ export function Message({ message }: MessageProps) {
             className={
               isUser
                 ? "brand-gradient text-primary-foreground"
-                : "brand-gradient-subtle text-primary"
+                : "bg-transparent"
             }
           >
             {isUser ? (

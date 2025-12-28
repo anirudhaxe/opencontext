@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import Image from "next/image";
 
 interface SidebarHeaderProps {
   onToggle: () => void;
@@ -17,9 +18,22 @@ export function SidebarHeader({
   return (
     <div className="p-4 border-b border-sidebar-border bg-linear-to-b from-sidebar to-sidebar/50 transition-all duration-300 ease-in-out">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="font-semibold text-lg opacity-100 w-auto bg-linear-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-          OpenContext Chat
-        </h2>
+        <div className="flex items-center gap-2 group">
+          <div className="relative flex-shrink-0">
+            <Image
+              src="/logo.png"
+              alt="OpenContext Logo"
+              width={32}
+              height={32}
+              className="transition-transform group-hover:scale-110"
+            />
+            {/* Glow effect on hover */}
+            <div className="absolute -inset-1 rounded-full bg-primary/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
+          </div>
+          <span className="font-semibold text-lg tracking-tight">
+            OpenContext
+          </span>
+        </div>
         {!isMobile && (
           <Button
             variant="ghost"
