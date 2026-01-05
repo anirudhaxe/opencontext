@@ -76,6 +76,7 @@ export async function POST(request: Request) {
       userId,
       name: generatedTitle || "PLACEHOLDER TITLE",
       status: "QUEUED",
+      jobUrl: data.assetUrl,
       // by default take job type as TEXT
       type:
         data.assetType === "txt"
