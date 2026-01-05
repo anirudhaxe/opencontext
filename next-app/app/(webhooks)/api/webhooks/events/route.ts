@@ -1,5 +1,8 @@
 import { webhookEventSchema } from "@/app/(webhooks)/webhooks-config";
+import { lookupKeyDataByKeyHashFromDb } from "@/db/apiKey";
 import { updateJobStatus } from "@/db/job";
+import { getTopKResultsFromVectorStore } from "@/lib/ai/utils/vector-similarity-search";
+import { hashApiKey } from "@/lib/api-key";
 import { handleApiError } from "@/lib/utils";
 import {
   verifyWebhookSignature,
@@ -32,6 +35,45 @@ export async function POST(request: Request) {
         });
 
         break;
+      case "mcp.toolcall":
+        const apiKey = data.data.apiKey;
+
+        if (!apiKey)
+          return Response.json({
+            retrievedContext: "ERROR: can't retrieve context. API key missing.",
+          });
+
+        const computedApiKeyHash = hashApiKey(apiKey);
+
+        const keyData = await lookupKeyDataByKeyHashFromDb(computedApiKeyHash);
+        const userId = keyData[0]?.userId;
+        const apiKeyHashFromDb = keyData[0]?.apiKeyHash;
+
+        if (!userId || apiKeyHashFromDb !== computedApiKeyHash)
+          return Response.json({
+            retrievedContext: "ERROR: can't retrieve context. Invalid API key.",
+          });
+
+        const documentChunksWithSimilarity =
+          await getTopKResultsFromVectorStore({
+            userId,
+            k: 3,
+            query: data.data.query,
+          });
+
+        if (!documentChunksWithSimilarity)
+          return Response.json({
+            retrievedContext:
+              "ERROR: can't retrieve context due to unexpected error.",
+          });
+        return Response.json({
+          retrievedContext: JSON.stringify(
+            documentChunksWithSimilarity.map((chunk) => ({
+              type: "text",
+              text: chunk.pageContent,
+            })),
+          ),
+        });
 
       default:
         return Response.json(

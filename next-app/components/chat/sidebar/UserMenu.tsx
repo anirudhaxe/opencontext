@@ -1,12 +1,13 @@
 "use client";
 
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
-import { ChevronRight, User, Moon, Sun, Settings, LogOut } from "lucide-react";
-import { useRef, useEffect } from "react";
+import { ChevronRight, User, Moon, Sun, Settings, LogOut, Key } from "lucide-react";
 import { useSession, signOut } from "@/lib/auth/auth-client";
+import { ApiKeysModal } from "./ApiKeysModal";
 
 interface UserMenuProps {
   isOpen: boolean;
@@ -23,6 +24,7 @@ export function UserMenu({
 }: UserMenuProps) {
   const userMenuRef = useRef<HTMLDivElement>(null);
   const { data: session, isPending } = useSession();
+  const [isApiKeysModalOpen, setIsApiKeysModalOpen] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -114,6 +116,17 @@ export function UserMenu({
           {/* </Button> */}
           {/* <Separator className="bg-border/50" /> */}
           <Button
+            onClick={() => {
+              setIsApiKeysModalOpen(true);
+            }}
+            className="w-full flex items-center gap-3 px-3 py-2 text-sm brand-hover rounded transition-colors justify-start"
+            variant="ghost"
+          >
+            <Key className="w-4 h-4 text-primary" />
+            <span className="text-foreground">API Keys</span>
+          </Button>
+          <Separator className="bg-border/50" />
+          <Button
             onClick={async () => {
               await signOut();
               onToggle();
@@ -126,6 +139,8 @@ export function UserMenu({
           </Button>
         </Card>
       )}
+
+      <ApiKeysModal open={isApiKeysModalOpen} onOpenChange={setIsApiKeysModalOpen} />
     </div>
   );
 }

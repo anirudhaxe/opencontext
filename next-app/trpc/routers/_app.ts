@@ -1,4 +1,5 @@
 import { createTRPCRouter } from "../init";
+import { apiKeyRouteController } from "./routeControllers/apiKey";
 import { chatRouteController } from "./routeControllers/chat";
 import { jobRouteController } from "./routeControllers/job";
 
@@ -10,6 +11,7 @@ import { jobRouteController } from "./routeControllers/job";
 export const appRouter = createTRPCRouter({
   chat: chatRouteController,
   job: jobRouteController,
+  apiKey: apiKeyRouteController,
 });
 
 // Export type definition of API

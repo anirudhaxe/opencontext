@@ -1,12 +1,9 @@
 import type { LanguageModelV2Middleware } from "@ai-sdk/provider";
 import { classiferCall, generateTextCall } from "@/lib/ai/llm";
-import vectorStore from "@/lib/ai/vector-store";
+import { getTopKResultsFromVectorStore } from "../utils/vector-similarity-search";
 
 export const conditionalRagMiddleware: LanguageModelV2Middleware = {
   transformParams: async ({ params }) => {
-    // return if error connecting to vector store
-    if (!vectorStore) return params;
-
     const { prompt: messages, providerOptions } = params;
 
     // return if providerOptions not provided (atleast userId is mandatory)
@@ -48,26 +45,15 @@ export const conditionalRagMiddleware: LanguageModelV2Middleware = {
       prompt: lastUserMessageContent,
     });
 
-    const vectorQueryFilter = {
-      must: [
-        {
-          key: "metadata.userId",
-          match: {
-            value: userId,
-          },
-        },
-        ...(jobIds?.length
-          ? [{ key: "metadata.jobId", match: { any: jobIds } }]
-          : []), // optional jobId filter
-      ],
-    };
-
     // searches for documents similar to a text query by embedding the query and performing a similarity search on the resulting vector and take the top K results
-    const documentChunksWithSimilarity = await vectorStore.similaritySearch(
-      hypotheticalAnswer,
-      3,
-      vectorQueryFilter,
-    );
+    const documentChunksWithSimilarity = await getTopKResultsFromVectorStore({
+      userId,
+      jobIds,
+      k: 3,
+      query: hypotheticalAnswer,
+    });
+
+    if (!documentChunksWithSimilarity) return params;
 
     // add the chunks to the last user message
     messages.push({

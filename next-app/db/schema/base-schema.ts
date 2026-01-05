@@ -11,6 +11,7 @@ import {
   uuid,
   varchar,
   pgEnum,
+  uniqueIndex,
 } from "drizzle-orm/pg-core";
 import type { InferSelectModel } from "drizzle-orm";
 import { user } from "./auth-schema";
@@ -25,13 +26,36 @@ export const jobStatus = pgEnum("job_status", [
   "ERROR", // if an error occurs while processing the job in worker
   "PROCESSED", // job successfully processed in worker
 ]);
+
+// api key table
+export const apiKey = pgTable(
+  "api_key",
+  {
+    id: uuid("id").primaryKey().notNull().defaultRandom(),
+    // userId is unique as each user allowed to have one API key
+    userId: text("user_id")
+      .references(() => user.id, { onDelete: "cascade" })
+      .notNull()
+      .unique(),
+    apiKeyHash: text("key").notNull().unique(),
+    apiKeyDisplay: text("api_key_display").notNull(),
+    updatedAt: timestamp("updated_at")
+      .defaultNow()
+      .$onUpdate(() => new Date())
+      .notNull(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  // index over key for optimized lookup
+  (apiKeyTable) => [uniqueIndex("api_key_idx").on(apiKeyTable.apiKeyHash)],
+);
+
 // job table
 export const job = pgTable("job", {
   // use this id as the master id of the job data in the vector store
   id: uuid("id").primaryKey().notNull().defaultRandom(),
   // add this id also in the vector store metadata
   userId: text("user_id")
-    .references(() => user.id)
+    .references(() => user.id, { onDelete: "cascade" })
     .notNull(),
   // name of the job (will be generated at the time of insertion)
   name: text("name").notNull(),
@@ -51,7 +75,7 @@ export const chat = pgTable("chat", {
   title: text("title").notNull(),
   userId: text("user_id")
     .notNull()
-    .references(() => user.id),
+    .references(() => user.id, { onDelete: "cascade" }),
   visibility: varchar("visibility", { enum: ["public", "private"] })
     .notNull()
     .default("private"),
