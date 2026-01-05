@@ -6,6 +6,7 @@ import { z } from "zod";
 const createJobSchema = z.object({
   userId: z.string(),
   name: z.string(),
+  jobUrl: z.string().optional(),
   status: z.enum(jobStatus.enumValues),
   type: z.enum(jobType.enumValues),
 });
@@ -13,6 +14,7 @@ const createJobSchema = z.object({
 const createJob = ({
   userId,
   name,
+  jobUrl,
   status,
   type,
 }: z.infer<typeof createJobSchema>) => {
@@ -21,6 +23,7 @@ const createJob = ({
     .values({
       userId,
       name,
+      jobUrl,
       status,
       type,
     })

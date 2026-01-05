@@ -59,6 +59,7 @@ export const job = pgTable("job", {
     .notNull(),
   // name of the job (will be generated at the time of insertion)
   name: text("name").notNull(),
+  jobUrl: text("job_url"),
   status: jobStatus().notNull(),
   type: jobType().notNull(),
   updatedAt: timestamp("updated_at")
