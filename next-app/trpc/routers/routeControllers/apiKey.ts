@@ -62,7 +62,7 @@ export const apiKeyRouteController = createTRPCRouter({
       } else {
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
-          message: "An error occured while trying to create API key",
+          message: "An error occurred while trying to create API key",
         });
       }
     } catch (error) {
@@ -80,7 +80,7 @@ export const apiKeyRouteController = createTRPCRouter({
       } else {
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
-          message: "An error occured while trying to delete API key",
+          message: "An error occurred while trying to delete API key",
         });
       }
     } catch (error) {

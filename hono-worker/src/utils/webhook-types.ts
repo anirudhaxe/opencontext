@@ -15,7 +15,7 @@ const baseSchema = z.object({
 });
 
 /**
- * Generic type for interpretting custom job events and selections
+ * Generic type for interpreting custom job events and selections
  **/
 type JobEventConfig<T extends string, S extends readonly string[]> = {
   event: T;

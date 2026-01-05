@@ -37,7 +37,10 @@ export const registerContextRetrieverTool = (mcpServer: McpServer) => {
             "ERROR: can't retrieve context due to unexpected error.",
         });
 
-      const content = await res.json();
+      const content = await res.json().catch((error) => {
+        console.error("ERROR: while parsing webhook response ", error);
+        return null;
+      });
 
       if (!content)
         return toolResponse({
