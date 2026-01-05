@@ -15,14 +15,43 @@ const baseSchema = z.object({
 });
 
 /**
- * Job event webhooks config
+ * Generic type for interpretting custom job events and selections
  **/
-// Generic type for interpretting custom job events and selections
 type JobEventConfig<T extends string, S extends readonly string[]> = {
   event: T;
   selections: S;
 };
 
+/**
+ * mcp event webhooks config
+ **/
+// Helper function to extend the base schema with custom mcp eventTypes and data types
+function createMcpEventSchema<T extends string, S extends readonly string[]>(
+  config: JobEventConfig<T, S>,
+) {
+  // extend base schema with custom fields
+  return baseSchema.extend({
+    eventType: z.literal(config.event),
+    data: z.object({
+      apiKey: z.string(),
+      query: z.string(),
+      selection: z.enum(config.selections),
+    }),
+  });
+}
+
+// Define custom mcp events
+const toolcallEvent = {
+  event: "mcp.toolcall",
+  selections: ["context_retriever"],
+} as const;
+
+// Create schemas for custom job events
+const mcpToolSchema = createMcpEventSchema(toolcallEvent);
+
+/**
+ * Job event webhooks config
+ **/
 // Helper function to extend the base schema with custom job eventTypes and data types
 function createJobEventSchema<T extends string, S extends readonly string[]>(
   config: JobEventConfig<T, S>,
@@ -64,7 +93,12 @@ const statusSchema = createJobEventSchema(statusEvent);
 const webhookEventSchema = z.discriminatedUnion("eventType", [
   statusSchema,
   // prioritySchema,
+  mcpToolSchema,
 ]);
+
+// const mcpEventschema = z.discriminatedUnion("eventType", [mcpToolSchema]);
+
+// const webhookEventSchema = z.union([jobEventSchema, mcpEventschema]);
 
 export type webhookEventType = z.infer<typeof webhookEventSchema>;
 
