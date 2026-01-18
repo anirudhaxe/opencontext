@@ -39,7 +39,7 @@ PostgreSQL database with Drizzle ORM. Stores user data, chat history, and applic
 
 ### Tech Stack
 
-- **AI**: Langchain, AI SDK, Xenova (Transformer.js), Locally hosted OpenAI Whisper ASR model, Uses AI Gateway for embedding, classification, other small inferences. Uses Openrouter for main completion inference
+- **AI**: LangChain, AI SDK, Xenova (Transformer.js), Locally hosted OpenAI Whisper ASR model, Uses AI Gateway for embedding, classification, other small inferences. Uses Openrouter for main completion inference
 - **Frontend**: Next.js 16, React, TypeScript, Tailwind CSS, Shadcn/ui
 - **Extension**: Chrome Extension API, React, Vite
 - **Backend**: Hono, Trpc, BullMQ
